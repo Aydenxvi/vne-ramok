@@ -1,0 +1,16 @@
+{
+  "name": "vne-ramok",
+  "version": "1.25.0",
+  "private": true,
+  "description": "VNE RAMOK 25 — full-stack fashion portfolio demo with original GLB outfits, demo checkout and Render deployment",
+  "scripts": {
+    "start": "node server.js",
+    "admin:setup": "node setup-admin.js",
+    "test": "node tests/run.js && node tests/server.integration.test.js && node tests/public-demo.integration.test.js",
+    "screenshots": "node tools/capture-screenshots.js",
+    "test:studio": "node tests/run.js"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

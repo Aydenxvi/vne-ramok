@@ -1,0 +1,23 @@
+name: Test VNE RAMOK
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check server.js
+          node --check storefront.js
+          node --check outfit-glb.js
+      - name: Run application tests
+        run: npm test
+      - name: Check publish safeguards
+        run: node tests/publish25.test.js

@@ -1,0 +1,69 @@
+/* MOTION 05-09 — editorial product page, connected checkout, profile, adaptive polish. */
+header{gap:12px}.account-toggle{border:1px solid var(--line);font:700 11px/1 monospace;letter-spacing:.08em;padding:13px 15px;white-space:nowrap}.account-toggle span{color:#818970;margin-left:12px}.account-toggle:hover{background:var(--ink);color:var(--paper)}
+.product-editorial{display:flex;justify-content:space-between;font:10px monospace;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:3px 0 19px;margin-bottom:23px}.detail-panel{padding:4px 4px 12px}.detail-panel h2{font-size:clamp(38px,4.4vw,72px);letter-spacing:-.04em;line-height:.96;margin-bottom:10px}.detail-panel .price{font-size:30px;font-weight:700;letter-spacing:-.04em}.detail-panel .detail-description{font-size:14px;line-height:1.65;margin:18px 0}.detail-step{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:17px;border-top:1px solid var(--line);font:700 11px monospace;letter-spacing:.08em}.detail-step button{font:10px monospace;border:0;text-decoration:underline;padding:5px}.detail-stock{display:flex;gap:9px;align-items:center;font:11px monospace;color:#4d5845;margin:15px 0}.stock-pulse{width:8px;height:8px;border-radius:50%;background:#80a656;box-shadow:0 0 0 4px #80a65624;animation:stock-pulse 2.2s ease-in-out infinite}.detail-help{font-size:12px;color:var(--muted);margin:16px 0}.detail-related{margin-top:36px;border-top:3px solid var(--ink);padding-top:22px}.detail-related .eyebrow{margin:0 0 12px}.detail-related button{display:flex;width:100%;justify-content:space-between;font:700 12px monospace;border:0;border-bottom:1px solid var(--line);text-align:left;padding:12px 0}.detail-related button:hover{color:#677528}.visual.custom-photo{padding:0}.custom-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .75s var(--ease)}.product-card:hover .custom-photo img{transform:scale(1.07)}.gallery-crop.custom-photo img{position:static;transform:none;width:100%;height:100%;object-fit:contain}.sold-tag{position:absolute;top:12px;left:12px;background:#1b1c19;color:#fff;padding:7px 11px;font:9px monospace;letter-spacing:.04em}.detail h2{max-width:100%}@keyframes stock-pulse{50%{box-shadow:0 0 0 8px #80a65600}}
+.commerce-dialog{max-width:min(1000px,95vw)!important;width:100%;padding:44px 42px!important;max-height:90vh;overflow-y:auto}.commerce-dialog h2{font-size:clamp(42px,6vw,76px);margin-bottom:27px}.accent-dot{color:#8f9b25}.checkout-grid{display:grid;grid-template-columns:1fr minmax(280px,.83fr);gap:clamp(18px,4vw,58px)}.step-head{font:700 11px monospace;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;padding:0 0 14px;border-bottom:1px solid var(--ink);margin:25px 0 18px}.step-head:first-child{margin-top:0}.commerce-fields{display:grid;gap:14px}.commerce-fields label,.promo-field{font:700 10px/1.4 monospace;letter-spacing:.08em;display:grid;gap:8px}.commerce-fields input,.commerce-fields textarea,.promo-field input{border:1px solid var(--line);background:#faf9f4;padding:13px 14px;font:14px/1.5 Arial;color:var(--ink);width:100%;border-radius:0}.commerce-fields input:focus,.commerce-fields textarea:focus,.promo-field input:focus{border-color:var(--ink);outline:1px solid var(--ink)}.commerce-fields textarea{resize:vertical}.delivery-choices{display:grid;gap:8px}.delivery-choices label{display:flex;gap:12px;align-items:center;border:1px solid var(--line);padding:14px 15px;cursor:pointer}.delivery-choices label:has(input:checked){border-color:var(--ink);background:#f3f4df}.delivery-choices input{accent-color:#181914}.delivery-choices label span{font:700 12px monospace}.delivery-choices label small{display:block;font:11px/1.5 Arial;color:var(--muted);margin-top:5px}.promo-field{margin-top:23px}.promo-field span{display:inline}.agree{display:flex;align-items:flex-start;gap:10px;font:11px/1.6 Arial;margin:22px 0}.agree input{accent-color:#151614;flex-shrink:0;margin-top:3px}.order-message{white-space:pre-wrap;font:12px/1.6 Arial;margin:20px 0;min-height:20px}.order-summary{background:#e1dfd6;padding:24px;align-self:start;position:sticky;top:0}.order-summary .step-head{margin-top:0}.order-line{display:flex;justify-content:space-between;align-items:start;gap:12px;padding:14px 0;border-bottom:1px solid #c6c4ba;font-size:12px}.order-line small{display:block;color:var(--muted);margin-top:3px}.order-line strong{white-space:nowrap}#order-breakdown{margin:20px 0 24px}#order-breakdown>div{display:flex;justify-content:space-between;gap:10px;padding:7px 0;font-size:12px}#order-breakdown>.total{border-top:2px solid var(--ink);padding-top:17px;margin-top:12px;font-size:21px}.order-submit{width:100%;min-height:62px;position:relative;overflow:hidden;justify-content:center;gap:10px}
+.order-submit .order-check{position:relative;z-index:1;width:0;height:20px;overflow:hidden;opacity:0;flex-shrink:0;transition:width .25s var(--ease),opacity .2s}
+.order-submit .order-check path{stroke-dasharray:30;stroke-dashoffset:30}
+.order-submit>span{position:relative;z-index:1}
+.order-submit.processing{pointer-events:none}
+.order-submit.processing:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(110deg,#d9ed1a 0 18px,#c7da12 18px 36px);background-size:200% 100%;animation:order-processing-sweep 1.1s linear infinite;opacity:.9}
+.order-submit.success{background:#9ce37e;border-color:#9ce37e}
+.order-submit.success .order-check{width:20px;opacity:1}
+.order-submit.success .order-check path{stroke-dashoffset:0;transition:stroke-dashoffset .45s .1s ease-out}
+@keyframes order-processing-sweep{from{background-position:0 0}to{background-position:-72px 0}}
+@media(prefers-reduced-motion:reduce){.order-submit.processing:before{animation:none}}.order-summary .muted{font:11px/1.5 Arial;margin:13px 0 0}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;margin-bottom:24px;border-bottom:1px solid var(--line)}.auth-tabs button{border:0;border-bottom:3px solid transparent;font:700 11px monospace;text-align:center;padding:16px 0}.auth-tabs button.active{border-bottom-color:var(--ink);background:var(--acid)}.hidden{display:none!important}.auth-hint{font-size:12px;color:var(--muted);max-width:60ch}.profile-welcome{display:flex;justify-content:space-between;align-items:start;border-bottom:3px solid var(--ink);padding:10px 0 25px;gap:12px}.profile-welcome h3{font-size:clamp(32px,4vw,54px);margin:8px 0}.profile-welcome h3 span{color:#808a35}.profile-welcome small{font:10px monospace}.profile-welcome p{font:12px monospace;margin:0}.profile-welcome button{font:700 10px monospace;padding:10px 14px}.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:38px;margin-top:28px}.profile-save{background:var(--acid);font:700 11px monospace;border-color:var(--acid);margin-top:4px}.profile-favorites button{display:flex;justify-content:space-between;width:100%;padding:12px 2px;border:0;border-bottom:1px solid var(--line);font:700 11px monospace;text-align:left}.profile-favorites button span{white-space:nowrap}.profile-order{padding:14px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}.profile-order>div{display:flex;justify-content:space-between;gap:10px}.profile-order small{font:11px Arial;color:var(--muted)}.profile-order b{font:700 15px monospace}.empty-note{font:12px/1.6 Arial;color:var(--muted)}.profile-admin-link{margin-top:30px}
+@media(max-width:1100px){header nav{gap:14px}header{padding:0 3%}.logo{font-size:27px}.account-toggle{padding:11px}.account-toggle span{display:none}}
+@media(max-width:780px){header{gap:7px}.commerce-dialog{padding:35px 22px!important}.checkout-grid{grid-template-columns:1fr}.order-summary{position:static}.profile-grid{grid-template-columns:1fr;gap:12px}.detail-panel{padding-top:12px}}
+@media(max-width:540px){header{height:70px}header nav{gap:7px}header .logo{font-size:23px}header .logo span{font-size:6px}header .account-toggle{font:700 10px monospace;padding:8px;border:none}header .cart-toggle{font-size:11px;padding:6px}.commerce-dialog{width:97vw!important;max-width:97vw!important;padding:32px 17px!important}.commerce-dialog h2{font-size:42px}.product-editorial{font-size:8px}.detail-panel h2{font-size:42px}.checkout-grid{gap:14px}.profile-welcome{flex-wrap:wrap}}
+@media(max-width:370px){header .account-toggle{font-size:9px}header .logo{font-size:20px}header .cart-toggle{font-size:9px}#cart-count{margin-left:2px;padding:3px 5px}}
+@media(prefers-reduced-motion:reduce){.stock-pulse{animation:none}}
+
+/* MOTION 14 — animated receipt, restored from original checkout concept. */
+.vr-receipt-stage[hidden]{display:none!important}
+.vr-receipt-stage{width:min(465px,100%);margin:44px auto 0;scroll-margin-top:24px;color:#161714}
+.vr-receipt-overline{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #acaa9e;font:9px/1.5 monospace;letter-spacing:.06em}
+.vr-receipt-machine{height:55px;background:#20211d;color:#f6f4eb;display:flex;align-items:center;justify-content:space-between;padding:0 19px;font:700 11px/1 monospace;letter-spacing:.12em;box-shadow:0 7px 0 #44463d,0 13px 20px #0002;position:relative;z-index:2}
+.vr-receipt-machine-light{width:10px;height:10px;background:var(--acid);box-shadow:0 0 0 4px #edff3925;border-radius:50%;margin-right:9px}
+.vr-receipt-printer{overflow:hidden;padding:0 16px 22px;background:linear-gradient(90deg,transparent 0%,#00000009 6%,#00000005 94%,transparent 100%)}
+.vr-receipt-paper{background:#fffdf4;box-shadow:0 12px 24px #0002;padding:27px 28px 34px;font:12px/1.5 'Courier New',monospace;clip-path:polygon(0 0,100% 0,100% 97.5%,96% 100%,92% 97.5%,88% 100%,84% 97.5%,80% 100%,76% 97.5%,72% 100%,68% 97.5%,64% 100%,60% 97.5%,56% 100%,52% 97.5%,48% 100%,44% 97.5%,40% 100%,36% 97.5%,32% 100%,28% 97.5%,24% 100%,20% 97.5%,16% 100%,12% 97.5%,8% 100%,4% 97.5%,0 100%);transform-origin:top center}
+.vr-receipt-stage.is-printing .vr-receipt-paper{animation:vr-receipt-print 1.6s steps(12,end) both}
+.vr-receipt-brand{text-align:center;font:700 40px/.95 var(--font-display);letter-spacing:-.06em}.vr-receipt-brand span{font-size:14px;vertical-align:top;letter-spacing:0}.vr-receipt-heading p{font-size:9px;margin:11px 0 16px;text-align:center;letter-spacing:.06em}.vr-receipt-demo{border:2px solid #131510;text-align:center;padding:7px 3px;font:bold 9px/1.5 monospace;letter-spacing:.07em}.vr-receipt-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:20px 0 12px;font-size:10px}.vr-receipt-rule{border-top:1px dashed #69685f;margin:12px 0}.vr-receipt-row{display:flex;justify-content:space-between;gap:12px;margin:11px 0;font-size:11px;align-items:start}.vr-receipt-row span{min-width:0;overflow-wrap:anywhere}.vr-receipt-row small{display:block;color:#66675f;margin-top:3px}.vr-receipt-row b{white-space:nowrap;font-size:11px}.vr-receipt-total{display:flex;justify-content:space-between;gap:12px;border-top:3px double #141513;padding:15px 0 0;margin-top:15px;font:bold 20px/1.3 monospace}.vr-receipt-barcode{height:42px;margin:25px auto 17px;width:82%;background:repeating-linear-gradient(90deg,#171717 0 2px,transparent 2px 4px,#171717 4px 5px,transparent 5px 9px,#171717 9px 13px,transparent 13px 16px)}.vr-receipt-footnote{text-align:center;font:9px/1.7 monospace;margin:0;color:#4a4b45}.vr-receipt-controls{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:10px;font:9px/1.5 monospace;letter-spacing:.03em}.vr-receipt-controls button{border:1px solid #2b2c27;background:transparent;padding:10px 13px;font:10px monospace}.vr-receipt-controls button:hover{background:var(--acid)}
+@keyframes vr-receipt-print{from{transform:translateY(-110%)}to{transform:translateY(0)}}
+@media(max-width:540px){.vr-receipt-stage{margin-top:32px}.vr-receipt-overline{font-size:8px}.vr-receipt-printer{padding-inline:9px}.vr-receipt-paper{padding:23px 16px 28px}.vr-receipt-brand{font-size:35px}.vr-receipt-total{font-size:17px}.vr-receipt-machine{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.vr-receipt-stage.is-printing .vr-receipt-paper{animation:none!important}}
+
+/* VNE RAMOK 24 — checkout consent alignment fix.
+   The global input width:100% must never stretch a checkbox; it pushed
+   the consent text outside the left column and underneath the order summary. */
+.commerce-dialog .checkout-grid > section,
+.commerce-dialog .checkout-grid > aside {
+  min-width: 0;
+}
+.commerce-dialog .checkout-grid .agree {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  justify-content: start;
+  column-gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  cursor: pointer;
+}
+.commerce-dialog .checkout-grid .agree > input[type="checkbox"] {
+  width: 18px !important;
+  min-width: 18px;
+  max-width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  padding: 0;
+  flex: none;
+  accent-color: #151614;
+}
+.commerce-dialog .checkout-grid .agree > span {
+  display: block;
+  min-width: 0;
+  width: auto;
+  overflow-wrap: break-word;
+  font: 12px/1.55 Arial, Helvetica, sans-serif;
+}

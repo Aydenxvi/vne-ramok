@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 892 501" fill="none" preserveAspectRatio="none" aria-hidden="true">
+<defs>
+  <linearGradient id="vr-arc" x1="0" y1="400" x2="850" y2="65" gradientUnits="userSpaceOnUse"><stop stop-color="#3a4037" stop-opacity=".08"/><stop offset=".35" stop-color="#51594b" stop-opacity=".7"/><stop offset=".72" stop-color="#777f63" stop-opacity=".9"/><stop offset="1" stop-color="#4e5646" stop-opacity=".12"/></linearGradient>
+  <linearGradient id="vr-flare" x1="150" y1="400" x2="810" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#849d3c"/><stop offset=".4" stop-color="#e3f98b"/><stop offset=".85" stop-color="#b7d73d"/><stop offset="1" stop-color="#f7ffe4"/></linearGradient>
+  <filter id="vr-soft" x="-15%" y="-30%" width="130%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<path d="M 0 500 C 0.2 480.3 1.95 461.7 5.3 442.4 C 31.5 276.1 188.7 144.2 356.2 147.4 C 365.97 147.4 375.76 147.41 385.55 147.41 C 505.99 147.41 626.43 147.09 746.88 146.44 C 804.08 146.85 858.88 109.92 880.39 57.48 C 888.06 39.34 891.9 19.63 891.71 0" stroke="#b3d34a" stroke-width="13" opacity=".16" filter="url(#vr-soft)"/>
+<path d="M 0 500 C 0.2 480.3 1.95 461.7 5.3 442.4 C 31.5 276.1 188.7 144.2 356.2 147.4 C 365.97 147.4 375.76 147.41 385.55 147.41 C 505.99 147.41 626.43 147.09 746.88 146.44 C 804.08 146.85 858.88 109.92 880.39 57.48 C 888.06 39.34 891.9 19.63 891.71 0" stroke="url(#vr-arc)" stroke-width="2.0" opacity=".98"/>
+<path d="M 0 500 C 0.2 480.3 1.95 461.7 5.3 442.4 C 31.5 276.1 188.7 144.2 356.2 147.4 C 365.97 147.4 375.76 147.41 385.55 147.41 C 505.99 147.41 626.43 147.09 746.88 146.44 C 804.08 146.85 858.88 109.92 880.39 57.48 C 888.06 39.34 891.9 19.63 891.71 0" stroke="#677462" stroke-width=".7" opacity=".65" transform="translate(0 8)"/>
+<path class="vr-light-trail" d="M 0 500 C 0.2 480.3 1.95 461.7 5.3 442.4 C 31.5 276.1 188.7 144.2 356.2 147.4 C 365.97 147.4 375.76 147.41 385.55 147.41 C 505.99 147.41 626.43 147.09 746.88 146.44 C 804.08 146.85 858.88 109.92 880.39 57.48 C 888.06 39.34 891.9 19.63 891.71 0" stroke="url(#vr-flare)" stroke-width="3.8" stroke-linecap="round" stroke-dasharray="100 1430" opacity=".86" filter="url(#vr-soft)"/>
+<path class="vr-light-trail" d="M 0 500 C 0.2 480.3 1.95 461.7 5.3 442.4 C 31.5 276.1 188.7 144.2 356.2 147.4 C 365.97 147.4 375.76 147.41 385.55 147.41 C 505.99 147.41 626.43 147.09 746.88 146.44 C 804.08 146.85 858.88 109.92 880.39 57.48 C 888.06 39.34 891.9 19.63 891.71 0" stroke="url(#vr-flare)" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="100 1430"/>
+
+</svg>

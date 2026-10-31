@@ -1,0 +1,88 @@
+/* MOTION 15 / Performance edition — deliberately loaded after motion.css.
+   Prevent costly repaints without removing checkout's animated receipt. */
+
+/* Filters on large text blocks forced full-region repaints during scrolling. */
+.motion-ready .reveal {
+  filter: none;
+  transition: opacity .68s var(--motion-ease), transform .78s var(--motion-ease);
+}
+.motion-ready .reveal.in-view { filter: none; }
+.motion-ready .hero-title__line { animation-name: perf-hero-arrive; }
+@keyframes perf-hero-arrive {
+  from { opacity: 0; transform: translate3d(0,26px,0); }
+  to { opacity: 1; transform: translate3d(0,0,0); }
+}
+.product-card .visual { transition: transform .5s var(--motion-ease); }
+.product-card:hover .visual { filter: none; }
+
+/* The previous continuously moving masked/background-position shimmer painted
+   up to 930px across the whole screen on every frame. Keep the atmospheric
+   glint, but pulse a static gradient instead (opacity can be composited). */
+.energy-arc { will-change: auto; }
+.energy-arc::after {
+  background-size: 100% 100%;
+  background-position: 50% 50%;
+  animation: perf-arc-glow 8s ease-in-out infinite;
+  will-change: auto;
+}
+@keyframes perf-arc-glow {
+  0%,100% { opacity: .16; }
+  45% { opacity: .72; }
+}
+/* The large filter:drop-shadow animation was a second full-size repaint. */
+.drop>.energy-field .energy-arc {
+  filter: none;
+  animation: energy-breathe 8s ease-in-out infinite;
+}
+.energy-field--light { filter: none; opacity: .73; }
+.pass-assembly { will-change: auto; }
+/* Avoid continuously repainting the logo's text gradient in the header. */
+.brand-wordmark .logo-letters { animation: brand-metal-sweep 2.5s ease-out 1 both; }
+
+/* Hover shimmer stays available on every control; only a handful of visible
+   featured CTAs use periodic shine, rather than dozens of selectors at once. */
+.shine-button::after { mix-blend-mode: normal; }
+.shine-button.shine-ambient:not(:hover):not(:focus-visible):not(:disabled)::after {
+  animation-duration: 10s;
+}
+#drop .controls button::after { animation-duration: 9s; }
+.drop .shuffle-card[aria-hidden="true"]::after { animation: none !important; opacity: 0; }
+
+/* These rules suspend *only* CSS animations. Transitions, native focus and
+   interactive content still work when users scroll into the next section. */
+.motion-offscreen *, .motion-offscreen *::before, .motion-offscreen *::after,
+.motion-modal-open main *, .motion-modal-open main *::before, .motion-modal-open main *::after,
+.motion-tab-hidden *, .motion-tab-hidden *::before, .motion-tab-hidden *::after {
+  animation-play-state: paused !important;
+}
+/* User-controlled Eco mode: decorative loops stop, meaningful one-shot motions
+   (including the restored receipt printer) remain available. */
+.motion-eco .energy-arc, .motion-eco .energy-arc::after,
+.motion-eco .pass-assembly, .motion-eco .pass-kicker span,
+.motion-eco .drop-copy h2 span, .motion-eco .drop .card-stack::after,
+.motion-eco .drop .shuffle-card::after,
+.motion-eco .shine-button.shine-ambient::after,
+.motion-eco #drop .controls button::after,
+.motion-eco .brand-wordmark .logo-letters,
+.motion-eco .lb-hotspot::after {
+  animation: none !important;
+}
+.motion-eco .energy-arc::after { opacity: .25; }
+.motion-eco .shine-button.shine-ambient::after,
+.motion-eco #drop .controls button::after { opacity: 0; }
+
+/* Portfolio footer: easy to switch effects without touching system settings. */
+#motion-quality-toggle {
+  font: 10px/1.4 monospace; letter-spacing: .035em;
+  border-color: var(--line); min-height: 42px;
+  white-space: nowrap;
+}
+#motion-quality-toggle:hover { border-color: var(--ink); }
+@media (max-width: 640px) {
+  #motion-quality-toggle { font-size: 10px; padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .hero-title__line { animation: none; }
+  .motion-ready .reveal { opacity: 1; transform: none; transition: none; }
+  .energy-arc::after { animation: none; }
+}

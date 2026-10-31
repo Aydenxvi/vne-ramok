@@ -1,0 +1,349 @@
+/* VNE RAMOK / MOTION SYSTEM — native CSS, no external runtime.
+   The Figma liquid-metal pill inspired the moving specular mark;
+   the supplied hanging profile card inspired the DROP PASS editorial object. */
+:root{--motion-ease:cubic-bezier(.22,1,.36,1)}
+/* Identity: a restrained chrome sweep instead of a generic neon logo. */
+.brand-wordmark .logo-letters{
+ display:inline-block; font:inherit; letter-spacing:inherit; line-height:inherit; margin:0;
+ background:linear-gradient(110deg,#151714 8%,#151714 30%,#777d79 43%,#f2f3e8 50%,#5e625c 56%,#151714 68%,#151714 100%);
+ background-size:230% 100%;background-position:100% 0;
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ transition:background-position 900ms var(--motion-ease),transform 600ms var(--motion-ease)
+}
+.brand-wordmark:hover .logo-letters,.brand-wordmark:focus-visible .logo-letters{background-position:0% 0;transform:translateY(-1px)}
+header nav a{position:relative}
+header nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--ink);transition:right .34s var(--motion-ease)}
+header nav a:hover::after,header nav a:focus-visible::after{right:0}
+/* Above-the-fold title is typeset in two lines so each rises separately. */
+.hero .hero-title__line{display:block;color:inherit;overflow:visible}
+.hero .hero-title__line .hero-dot{color:#8b9622}
+.motion-ready .hero-title__line{animation:hero-letters-in .85s var(--motion-ease) both}
+.motion-ready .hero-title__line:nth-child(2){animation-delay:.13s}
+.motion-ready .hero-copy>.eyebrow{animation:hero-soft-in .8s .18s var(--motion-ease) both}
+.motion-ready .hero-copy>p{animation:hero-soft-in .9s .32s var(--motion-ease) both}
+.motion-ready .hero-actions{animation:hero-soft-in .9s .45s var(--motion-ease) both}
+.motion-ready .hero-photo .hero-visual{animation:photo-arrive 1.2s var(--motion-ease) both}
+@keyframes hero-letters-in{from{opacity:0;transform:translateY(32px);filter:blur(7px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes hero-soft-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes photo-arrive{from{opacity:.7;transform:scale(1.045)}to{opacity:1;transform:scale(1)}}
+.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:1px}
+.hero-actions .primary{min-height:59px}
+.liquid-brand{
+ --light-x:50%;--light-y:50%;position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;
+ min-height:58px;padding:0 19px;border:1px solid #555a56;border-radius:999px;white-space:nowrap;overflow:hidden;
+ color:#f6f5ee;background:linear-gradient(170deg,#838a85 0%,#2d312e 14%,#0d100f 38%,#343a36 70%,#0b0d0c 100%);
+ box-shadow:inset 0 1px 2px #fff8,inset 0 -4px 9px #000b,0 7px 18px #0002;
+ transition:transform .35s var(--motion-ease),box-shadow .35s var(--motion-ease),border-color .35s
+}
+.liquid-brand::before{content:"";position:absolute;inset:0;border-radius:inherit;
+ background:radial-gradient(ellipse at var(--light-x) var(--light-y),#ffffffb8 0%,#ffffff4d 16%,transparent 55%);
+ opacity:.42;transition:opacity .5s;pointer-events:none}
+.liquid-brand::after{content:"";position:absolute;inset:2px;border:1px solid #ffffff35;border-radius:inherit;box-shadow:inset 0 0 9px #ffffff4f;pointer-events:none}
+.liquid-brand:hover{box-shadow:inset 0 1px 5px #fff7,inset 0 -5px 12px #0009,0 14px 32px #0003;border-color:#a5ada6}
+.liquid-brand:hover::before{opacity:.8}
+.liquid-brand__text{position:relative;z-index:1;font:700 15px var(--font-display);letter-spacing:.055em;text-shadow:0 1px 1px #0008}
+.liquid-brand__trademark{z-index:1;position:relative;font-size:9px;align-self:center;margin:-13px 0 0 3px}
+/* Buttons: crisp tactile response, with directional arrow movement. */
+.primary{position:relative;overflow:hidden;isolation:isolate;box-shadow:0 0 0 #16171400;
+ transition:transform .32s var(--motion-ease),box-shadow .35s var(--motion-ease),background .25s,color .25s,border-color .25s}
+.primary::before{content:"";position:absolute;z-index:-1;inset:0;background:#181a17;transform:translateX(-102%);
+ transition:transform .46s var(--motion-ease)}
+.primary:hover:not(:disabled){color:#eeece5;border-color:#181a17;box-shadow:0 12px 24px #0002;background:var(--acid)}
+.primary:hover::before{transform:translateX(0)}
+.primary:active:not(:disabled){transform:scale(.965) translate(var(--mag-x,0px),var(--mag-y,0px))}
+.primary .action-arrow{display:inline-block;transition:transform .3s var(--motion-ease)}
+.primary:hover .action-arrow{transform:translate(4px,-4px) rotate(8deg)}
+.magnetic:hover{transform:translate3d(var(--mag-x,0px),var(--mag-y,0px),0)}
+.text-button{transition:transform .3s var(--motion-ease)}.text-button:hover{transform:translateX(5px)}
+/* Modest feedback on frequently used controls. */
+.cart-toggle{transition:transform .26s var(--motion-ease)}.cart-toggle:hover{transform:translateY(-2px)}
+#cart-count{display:inline-block;transform-origin:center;transition:transform .25s}
+#cart-count.is-popping{animation:cart-pop .45s var(--motion-ease)}
+@keyframes cart-pop{0%,100%{transform:scale(1)}40%{transform:scale(1.36) rotate(8deg)}70%{transform:scale(.91)}}
+.category-list button{transition:background .28s,box-shadow .35s,transform .4s var(--motion-ease)}
+.category-list button:hover{transform:translateY(-6px);box-shadow:0 13px 25px #00000015;z-index:1}
+.category-list button .garment{transition:transform .55s cubic-bezier(.18,1.7,.3,1)}
+.category-list button:hover .garment{transform:translateY(-6px) rotate(-7deg) scale(1.12)}
+.favorite{transition:transform .3s cubic-bezier(.2,1.8,.3,1),background .25s}
+.favorite:hover{transform:scale(1.15) rotate(-9deg)}
+.favorite[aria-pressed=true]{animation:favorite-tap .42s var(--motion-ease)}
+@keyframes favorite-tap{0%{transform:scale(.8)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+.product-card{transition:transform .5s var(--motion-ease),box-shadow .5s}
+.product-card:hover{transform:translateY(-6px)}
+.product-card .product-open{position:relative;overflow:visible}
+.product-card .visual{transition:filter .45s,transform .65s var(--motion-ease)}
+.product-card:hover .visual{transform:scale(1.025);filter:contrast(1.06)}
+.product-card .product-open::after{content:"БЛИЖЕ ↗";position:absolute;top:20px;right:10px;
+ display:block;background:#171917;color:#f6f4e9;padding:8px 13px;font:10px/1 monospace;letter-spacing:.04em;
+ transform:translateY(8px);opacity:0;transition:transform .35s var(--motion-ease),opacity .3s;pointer-events:none}
+.product-card:hover .product-open::after,.product-card .product-open:focus-visible::after{opacity:1;transform:translateY(0)}
+/* The drop-pass chapter: customer identity card, not a fake loyalty feature. */
+.pass-section{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:590px;overflow:hidden;
+ color:#f5f3e8;background:#1b1d1a}
+.pass-section::before{content:"";position:absolute;left:-9vw;bottom:-30vw;width:62vw;height:62vw;border:1px solid #ffffff0e;border-radius:50%;pointer-events:none}
+.pass-copy{position:relative;z-index:2;padding:70px clamp(25px,7vw,115px)}
+.pass-copy .eyebrow{color:#acae9d;margin-bottom:27px}
+.pass-kicker{display:flex;gap:12px;align-items:center;font:11px/1.4 monospace;letter-spacing:.15em;margin-bottom:28px;color:#bbc09c}
+.pass-kicker span{color:var(--acid);font-size:17px;animation:star-spin 16s linear infinite}
+@keyframes star-spin{to{transform:rotate(360deg)}}
+.pass-copy h2{font-size:clamp(48px,6.8vw,108px);letter-spacing:-.045em;line-height:.96}
+.pass-copy h2 em{font-style:normal;color:var(--acid)}
+.pass-copy>p{max-width:360px;color:#c3c5b9;font:14px/1.8 Arial,Helvetica,sans-serif;margin:28px 0}
+.pass-copy .primary{color:#141611}
+.pass-index{font:10px monospace;letter-spacing:.08em;color:#92978e;margin-top:75px}
+.pass-stage{--spot-x:55%;--spot-y:42%;position:relative;min-width:0;min-height:590px;overflow:hidden;
+ background:radial-gradient(circle at var(--spot-x) var(--spot-y),#777d74 0%,#464b45 34%,#292d28 76%,#222521 100%);
+ perspective:1000px}
+.pass-stage:before{content:"";position:absolute;inset:0;opacity:.18;background-image:radial-gradient(#ffffffad .7px,transparent .9px);background-size:17px 17px;pointer-events:none}
+.pass-stage__topline,.pass-stage__bottomline{position:absolute;z-index:2;color:#c5c9ba;letter-spacing:.16em;font:9px monospace;pointer-events:none}
+.pass-stage__topline{top:22px;right:22px}.pass-stage__bottomline{bottom:24px;left:22px}
+.pass-assembly{position:absolute;top:-17px;left:50%;width:290px;height:555px;margin-left:-145px;transform-origin:50% 0;
+ animation:pass-dangle 6s ease-in-out infinite;will-change:transform}
+@keyframes pass-dangle{0%,100%{transform:rotate(-3deg)}45%{transform:rotate(3deg)}70%{transform:rotate(.5deg)}}
+.pass-strap{position:absolute;top:0;left:calc(50% - 9px);width:18px;height:143px;z-index:2;
+ background:#151714 url('assets/drop-pass/lanyard.svg') center / 100% 100% no-repeat;border-radius:2px;
+ box-shadow:inset 2px 0 #ffffff18,3px 0 5px #0005}
+.pass-strap span{display:block;position:absolute;inset:0;background:repeating-linear-gradient(0deg,#ffffff0a 0 1px,transparent 1px 4px)}
+.pass-clasp{position:absolute;z-index:3;top:121px;left:calc(50% - 26px);width:52px;height:24px;background:url('assets/drop-pass/clasp.svg') center/contain no-repeat}
+.drop-pass{--card-rx:0deg;--card-ry:0deg;--shine-x:50%;--shine-y:35%;position:absolute;z-index:1;top:141px;left:0;width:290px;height:383px;
+ display:flex;flex-direction:column;border-radius:22px;background:#0c0d0d;color:white;overflow:hidden;
+ border:1px solid #ffffff2b;box-shadow:7px 27px 45px #0009, inset 0 2px 2px #fff2;
+ transform:perspective(950px) rotateX(var(--card-rx)) rotateY(var(--card-ry));
+ transition:transform .5s cubic-bezier(.17,1.45,.28,1),box-shadow .35s}
+.drop-pass::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.4;
+ background:radial-gradient(circle at var(--shine-x) var(--shine-y),#ffffff48,transparent 44%);transition:opacity .3s}
+.drop-pass::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+ background-image:radial-gradient(#fff5 .6px,transparent 1px);background-size:16px 16px;mask-image:linear-gradient(90deg,#0000,#000 30%,#000 70%,#0000)}
+.drop-pass:hover{box-shadow:7px 32px 60px #000b,inset 0 2px 2px #fff4}
+.drop-pass:hover::before{opacity:.9}
+.pass-slot{z-index:3;position:absolute;top:11px;left:50%;transform:translateX(-50%);width:68px;height:10px;
+ background:#262928;border:2px solid #4d524f;border-radius:10px;box-shadow:0 1px 1px #fff3}
+.drop-pass__meta{display:flex;justify-content:space-between;padding:39px 20px 0;gap:10px;font:9px monospace;letter-spacing:.13em;color:#b6b9b1}
+.drop-pass__headline{font:700 34px/.99 var(--font-display);letter-spacing:.018em;text-align:center;margin:19px 0 17px}
+.drop-pass__picture{width:160px;height:158px;margin:0 auto;border-radius:10px;border:5px solid #353837;
+ background-image:url('assets/campaign.webp');background-repeat:no-repeat;background-size:300% auto;background-position:0% 20%;
+ box-shadow:inset 0 0 0 1px #ffffff1a}
+.drop-pass__footer{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 23px;margin-top:auto;margin-bottom:21px;
+ font:700 18px/.95 var(--font-display);letter-spacing:.08em}
+.drop-pass__footer small{display:block;margin-top:7px;color:#aeb3a9;letter-spacing:.06em;font:8px monospace}
+.drop-pass__arrow{border-radius:50%;display:grid;place-items:center;width:39px;height:39px;background:var(--acid);color:var(--ink);font:23px Arial;transition:transform .35s var(--motion-ease)}
+.drop-pass:hover .drop-pass__arrow{transform:rotate(45deg) scale(1.07)}
+/* Reveal on entry: only opt in once script has been parsed; never hide content on JS failure. */
+.motion-ready .reveal{opacity:0;transform:translateY(36px);filter:blur(6px);transition:opacity .85s var(--motion-ease),transform .95s var(--motion-ease),filter 1s}
+.motion-ready .reveal.in-view{opacity:1;transform:translateY(0);filter:blur(0)}
+/* Little click ripple is strictly visual and never intercepts interaction. */
+.motion-ripple{position:absolute;z-index:4;width:22px;height:22px;left:var(--ripple-x);top:var(--ripple-y);border:1px solid currentColor;
+ border-radius:50%;pointer-events:none;animation:motion-ripple .65s ease-out forwards;opacity:.55}
+@keyframes motion-ripple{to{transform:translate(-50%,-50%) scale(8);opacity:0}}
+@media(max-width:1100px){.pass-copy{padding-left:7%;padding-right:5%}.pass-copy h2{font-size:clamp(44px,6.5vw,80px)}.hero-actions{gap:10px}.liquid-brand{min-height:51px;padding:0 12px}.hero-actions .primary{min-height:51px}}
+@media(max-width:700px){
+ .pass-section{grid-template-columns:1fr;min-height:0}
+ .pass-copy{padding:62px 6% 35px}
+ .pass-copy h2{font-size:clamp(48px,11vw,80px)}
+ .pass-copy>p{margin:20px 0 25px}
+ .pass-index{margin-top:35px}
+ .pass-stage{min-height:530px}
+ .pass-assembly{top:-25px}
+ .pass-stage__bottomline{font-size:8px}
+ .hero-actions{gap:10px}
+ .liquid-brand{min-height:49px}
+ .hero-actions .primary{min-height:49px}
+}
+@media(max-width:400px){.hero-actions .primary{padding:14px 17px;gap:14px}.liquid-brand{padding:0 14px}.liquid-brand__text{font-size:13px}.pass-stage{min-height:500px}.pass-copy h2{font-size:clamp(44px,11vw,60px)}}
+@media(hover:none){.magnetic:hover{transform:none}.product-card:hover{transform:none}.category-list button:hover{transform:none}.pass-stage__bottomline{display:none}}
+@media(prefers-reduced-motion:reduce){
+ .motion-ready .reveal{opacity:1;transform:none;filter:none}
+ .motion-ready .hero-title__line,.motion-ready .hero-copy>.eyebrow,.motion-ready .hero-copy>p,.motion-ready .hero-actions,.motion-ready .hero-photo .hero-visual{animation:none}
+ .pass-assembly{animation:none!important;transform:none}.pass-kicker span{animation:none!important}
+ .drop-pass{transform:none!important}.motion-ripple{display:none}
+}
+
+/* VNE RAMOK / ENERGY & CHROME — adapted from the supplied energy and gloss references.
+   Deliberately restrained: warm mineral hairlines and glints, never bright electric blue. */
+.energy-field{position:absolute;inset:0;overflow:hidden;pointer-events:none;isolation:isolate}
+.energy-arc{display:block;position:absolute;width:clamp(380px,68vw,930px);aspect-ratio:892/501;background:url('assets/energy/arc.svg') center/100% 100% no-repeat;opacity:.8;will-change:opacity;animation:energy-breathe 7.2s ease-in-out infinite}
+.energy-arc--two{animation-delay:-3.6s}
+.energy-arc--three{animation-delay:-2.1s}
+.energy-arc--four{animation-delay:-6.4s}
+@keyframes energy-breathe{0%,100%{opacity:.72}50%{opacity:1}}
+/* Light canvas: arcs are almost watermark-like; text remains sharply readable. */
+.hero-copy{position:relative;isolation:isolate}
+.hero-copy>.energy-field{z-index:0}
+.hero-copy>:not(.energy-field){position:relative;z-index:1}
+.energy-field--light{opacity:.83;filter:grayscale(.4) saturate(.5) brightness(.45)}
+.energy-field--light .energy-arc--one{width:750px;max-width:135%;right:-150px;top:-85px;transform:scaleX(-1) rotate(-5deg)}
+.energy-field--light .energy-arc--two{width:620px;max-width:125%;left:-205px;bottom:-145px;transform:rotate(165deg)}
+/* The hanging-pass chapter gets a single pair of ghosted arcs behind content. */
+.pass-section>.energy-field{z-index:0}
+.energy-field--pass{opacity:.78}
+.energy-field--pass .energy-arc--one{width:650px;left:-180px;top:-145px;transform:scaleX(-1) rotate(-5deg)}
+.energy-field--pass .energy-arc--two{width:650px;right:-190px;bottom:-165px;transform:scaleY(-1) rotate(-2deg)}
+/* Hero statement: balanced symmetric curves hugging the outer edges. */
+.manifesto{position:relative;isolation:isolate;overflow:hidden;min-height:435px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(ellipse 72% 100% at 50% 50%,#292e23 0%,#181b17 58%,#121410 100%)}
+.manifesto>.energy-field{z-index:0}
+.manifesto>:not(.energy-field){position:relative;z-index:1}
+.energy-field--manifesto .energy-arc--one{width:650px;left:-185px;top:-135px;transform:scaleX(-1) rotate(0deg)}
+.energy-field--manifesto .energy-arc--two{width:650px;right:-185px;top:-135px;transform:rotate(0deg)}
+.energy-field--manifesto .energy-arc--three{width:650px;left:-195px;bottom:-195px;transform:rotate(180deg)}
+.energy-field--manifesto .energy-arc--four{width:650px;right:-195px;bottom:-195px;transform:scaleY(-1)}
+.manifesto .eyebrow{color:#b5c29c}
+.manifesto .primary{margin-top:10px}
+/* Gloss is a directional highlight (as in 'блеск'), not a permanent shiny coating.
+   Apply to primary CTAs and otherwise plain buttons; leave payment state machine untouched. */
+.shine-button{position:relative;isolation:isolate;overflow:hidden;transition:border-color .3s,background-color .3s,box-shadow .36s var(--motion-ease),color .3s}
+.shine-button::after{content:"";position:absolute;z-index:3;pointer-events:none;top:-75%;bottom:-75%;left:-55%;width:45%;background:linear-gradient(90deg,transparent 0%,#ffffff12 20%,#ffffffd4 48%,#ffffff43 62%,transparent 100%);mix-blend-mode:screen;opacity:.7;transform:translateX(-95%) skewX(-22deg);transition:transform .65s var(--motion-ease),opacity .28s ease}
+.shine-button:hover:not(:disabled)::after,.shine-button:focus-visible::after{transform:translateX(440%) skewX(-22deg);opacity:1}
+.shine-button:not(.primary):hover:not(:disabled){box-shadow:inset 0 0 0 1px #b5bc95,0 5px 17px #00000014}
+/* Only a few quiet controls receive rare idle glints: the entire interface never flashes together. */
+.shine-button.shine-ambient:not(:hover):not(:focus-visible):not(:disabled)::after{animation:shine-quiet 6.5s ease-in-out infinite;animation-delay:var(--shine-delay,0s);opacity:.78}
+@keyframes shine-quiet{0%,24%{transform:translateX(-95%) skewX(-22deg)}49%,100%{transform:translateX(440%) skewX(-22deg)}}
+/* Give controls a slightly richer hover texture without making every button neon. */
+.shine-button:not(.primary):not(.favorite):not(.close):not(.cart-toggle):not(.orbit-tile):active:not(:disabled){transform:scale(.985)}
+#sections-open.shine-button{padding-left:8px;padding-right:8px;border-radius:2px}
+#favorites-filter.shine-button[aria-pressed=true]:hover{box-shadow:inset 0 0 0 1px #e0e8a9,0 5px 18px #0002}
+/* The small 'remove' link and heart have minimal glint so labels stay readable. */
+.remove.shine-button::after,.favorite.shine-button::after{opacity:.4}
+/* Never cover the product photo or orbit art with glints: only controls. */
+@media(max-width:800px){
+ .energy-field--light .energy-arc--one{right:-240px;top:-70px}
+ .energy-field--manifesto .energy-arc--one{left:-290px}
+ .energy-field--manifesto .energy-arc--two{right:-290px}
+ .energy-field--manifesto .energy-arc--three{left:-300px}
+ .energy-field--manifesto .energy-arc--four{right:-300px}
+}
+@media(max-width:540px){
+ .manifesto{min-height:385px;padding:73px 19px}
+ .energy-field--light .energy-arc--one{width:470px;right:-185px;top:-60px}
+ .energy-field--light .energy-arc--two{width:420px;left:-190px;bottom:-95px}
+ .energy-field--pass{opacity:.5}
+ .energy-field--manifesto .energy-arc--one{width:500px;left:-255px;top:-140px}
+ .energy-field--manifesto .energy-arc--two{width:500px;right:-255px;top:-140px}
+ .energy-field--manifesto .energy-arc--three{width:490px;left:-240px;bottom:-165px}
+ .energy-field--manifesto .energy-arc--four{width:490px;right:-240px;bottom:-165px}
+ .shine-button.shine-ambient:not(:hover):not(:focus-visible):not(:disabled)::after{animation:shine-quiet 8s ease-in-out infinite}
+}
+@media(prefers-reduced-motion:reduce){
+ .energy-arc{animation:none!important;will-change:auto;opacity:.45}
+ .shine-button::after,.shine-button.shine-ambient::after{animation:none!important;transition:none!important;opacity:0!important}
+}
+
+/* MOTION 02: always-visible traces, intentional motion on brand and controls. */
+.energy-field{contain:paint}
+.energy-arc::after{content:"";position:absolute;inset:0;pointer-events:none;
+  -webkit-mask-image:url('assets/energy/arc.svg');mask-image:url('assets/energy/arc.svg');
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  background:linear-gradient(105deg,transparent 15%,#eafbb000 34%,#f5ffc9d9 45%,#fbffeebf 49%,#eafbb000 61%,transparent 82%);
+  background-size:240% 100%;animation:energy-specular 6.2s ease-in-out infinite;opacity:.68}
+.energy-arc--two::after{animation-delay:-2.8s}.energy-arc--three::after{animation-delay:-1.7s}.energy-arc--four::after{animation-delay:-4.1s}
+@keyframes energy-specular{0%,5%{background-position:100% 0}58%,100%{background-position:-100% 0}}
+.brand-wordmark .logo-letters{animation:brand-metal-sweep 7s linear infinite}
+@keyframes brand-metal-sweep{0%,15%{background-position:100% 0}55%,100%{background-position:-45% 0}}
+/* Subtle moving rim on hero title without compromising typography. */
+.hero .hero-title__line{position:relative}
+.hero .hero-title__line:first-child{text-shadow:0 2px 0 #ffffff2b}
+/* Keep the surface near the CTA clear, without putting an overlay above links. */
+.pass-copy,.pass-stage{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){
+  .brand-wordmark .logo-letters,.energy-arc::after{animation:none!important}
+  .energy-arc::after{opacity:0}
+  .shine-button.shine-ambient:not(:hover):not(:focus-visible):not(:disabled)::after{animation:none!important;opacity:0!important}
+}
+
+
+/* MOTION 03 — the NEW DROP has its own energy lines and reliably visible
+   gloss. Scoped to the user's screenshot, with foreground controls kept clear. */
+.drop{position:relative;isolation:isolate;background:
+  radial-gradient(ellipse 44% 58% at 6% 24%,rgba(230,238,174,.22),transparent 80%),
+  radial-gradient(ellipse 43% 55% at 93% 81%,rgba(191,211,120,.14),transparent 85%),
+  #dfddd4}
+.drop>.energy-field{z-index:0;inset:0;opacity:1}
+.drop>.energy-field .energy-arc{
+  background-image:url('assets/energy/drop-arc.svg');
+  opacity:.96;
+  filter:drop-shadow(0 1px 8px rgba(206,223,120,.22));
+  animation:drop-line-breathe 7s ease-in-out infinite
+}
+/* We reuse the reference's line-following highlight, including on light canvas. */
+.drop>.energy-field .energy-arc::after{
+  -webkit-mask-image:url('assets/energy/drop-arc.svg');
+  mask-image:url('assets/energy/drop-arc.svg');
+  opacity:.9
+}
+.energy-field--drop .energy-arc--one{
+  width:min(800px,66vw);left:-175px;top:-205px;transform:scaleX(-1) rotate(-11deg)
+}
+.energy-field--drop .energy-arc--two{
+  width:min(900px,75vw);right:-175px;bottom:-190px;transform:rotate(180deg);
+  animation-delay:-3.3s!important
+}
+.energy-field--drop .energy-arc--three{
+  width:min(665px,56vw);right:8%;top:-210px;transform:scaleY(-1) rotate(-6deg);
+  opacity:.55!important;animation-delay:-5.1s!important
+}
+@keyframes drop-line-breathe{
+  0%,100%{filter:drop-shadow(0 0 3px rgba(196,220,108,.12));opacity:.78}
+  50%{filter:drop-shadow(0 0 12px rgba(207,235,105,.34));opacity:1}
+}
+.drop>.drop-copy,.drop>.card-stack{position:relative;z-index:1}
+.drop-copy h2{position:relative;isolation:isolate}
+.drop-copy h2 span{display:inline-block;transform-origin:30% 75%;animation:drop-arrow-rise 5.5s ease-in-out infinite}
+@keyframes drop-arrow-rise{0%,100%{transform:translate(0,0) rotate(-2deg)}50%{transform:translate(7px,-8px) rotate(4deg)}}
+/* Animate the tactile glass surface even without a pointer: these are the
+   exact buttons in the screenshot, never blocking button labels or clicks. */
+.drop .controls button{position:relative;overflow:hidden;isolation:isolate;
+  transition:transform .32s var(--motion-ease),border-color .32s,box-shadow .35s}
+#drop .controls button::after{
+  content:"";pointer-events:none;position:absolute;z-index:4;left:-55%;top:-80%;bottom:-80%;width:46%;
+  background:linear-gradient(90deg,transparent 0%,rgba(111,117,96,.08) 18%,rgba(255,255,246,.86) 43%,rgba(250,255,218,.29) 62%,transparent 92%);
+  transform:translateX(-110%) skewX(-20deg);opacity:1;
+  animation:drop-button-gloss 5.8s ease-in-out infinite
+}
+#drop #shuffle-prev::after{animation-delay:-2.8s}
+#drop #shuffle-pause::after{animation-delay:-1.0s}
+#drop #shuffle-next::after{background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.2) 18%,rgba(255,255,255,.88) 48%,rgba(255,255,255,.3) 65%,transparent 95%);animation-duration:4.8s;animation-delay:-2.2s}
+@keyframes drop-button-gloss{0%,13%{transform:translateX(-110%) skewX(-20deg)}44%,100%{transform:translateX(470%) skewX(-20deg)}}
+.drop .controls button:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 9px 22px rgba(25,28,19,.12)}
+.drop .controls button:active:not(:disabled){transform:translateY(0) scale(.97)}
+/* The paper stack catches a very slow studio reflection, while remaining
+   fully interactive. The stacked cards themselves still use original JS. */
+.drop .shuffle-card::after{content:"";position:absolute;z-index:3;inset:0;pointer-events:none;
+ background:linear-gradient(112deg,transparent 33%,rgba(255,255,255,.04) 38%,rgba(255,255,255,.34) 47%,rgba(255,255,255,.05) 54%,transparent 62%);
+ transform:translateX(-135%);animation:drop-card-reflection 9s ease-in-out infinite}
+@keyframes drop-card-reflection{0%,55%{transform:translateX(-135%)}81%,100%{transform:translateX(135%)}}
+.drop .card-stack::after{content:"";position:absolute;z-index:0;inset:15% -20% 8%;border-radius:50%;pointer-events:none;
+ box-shadow:0 0 75px 35px rgba(216,228,153,.18);animation:drop-shadow-pulse 6s ease-in-out infinite}
+@keyframes drop-shadow-pulse{0%,100%{opacity:.35;transform:scale(.97)}50%{opacity:.85;transform:scale(1.04)}}
+/* Client-side landing with no build step and graceful phone layout. */
+@media(max-width:800px){
+ .energy-field--drop .energy-arc--one{left:-215px;top:-150px;width:650px}
+ .energy-field--drop .energy-arc--two{right:-260px;bottom:-155px;width:780px}
+ .energy-field--drop .energy-arc--three{right:-140px;top:-170px;width:550px}
+}
+@media(max-width:540px){
+ .drop{background:#dfddd4}
+ .drop>.energy-field{opacity:.83}
+ .energy-field--drop .energy-arc--one{left:-270px;top:-160px;width:650px}
+ .energy-field--drop .energy-arc--two{right:-280px;bottom:-100px;width:620px}
+ .energy-field--drop .energy-arc--three{display:none}
+ .drop .card-stack::after{inset:15% -12% 6%}
+ .drop .controls button{padding:11px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ .drop>.energy-field .energy-arc,.drop-copy h2 span,.drop .controls button::after,
+ .drop .shuffle-card::after,.drop .card-stack::after{animation:none!important;transition:none!important}
+ .drop .controls button::after,.drop .shuffle-card::after{opacity:0}
+}
+
+/* MOTION 11 — add-to-cart "flies to the bag" flourish. A fixed-position
+   ghost dot is created in JS at the trigger button and removed on
+   animationend; this file only owns its look + motion. */
+.fly-to-cart{
+ position:fixed;z-index:200;width:18px;height:18px;border-radius:50%;
+ background:var(--acid);box-shadow:0 0 0 2px var(--ink),0 10px 18px #0003;
+ pointer-events:none;animation:fly-to-cart .6s cubic-bezier(.3,.7,.35,1) forwards;
+}
+@keyframes fly-to-cart{
+ 0%{transform:translate(0,0) scale(1);opacity:1}
+ 65%{opacity:1}
+ 100%{transform:translate(var(--fly-dx),var(--fly-dy)) scale(.2);opacity:0}
+}

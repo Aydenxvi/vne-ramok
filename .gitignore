@@ -1,0 +1,19 @@
+# Private data and local deployment secrets — NEVER commit these.
+/data/
+/uploads/
+/node_modules/
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.db
+*.log
+*.pem
+*.key
+*.p12
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

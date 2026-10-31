@@ -1,0 +1,13 @@
+VNE RAMOK 23 — PATCH (install onto your WORKING version 22)
+
+1. Stop the old VNE RAMOK server (Ctrl+C).
+2. BACK UP your original vne-ramok folder, especially data/.
+3. Extract the PATCH ZIP, open its folder, then copy its CONTENTS into the
+   existing vne-ramok folder containing server.js and start_windows.bat.
+4. Allow Windows to replace files; preserve the original data/ and uploads/.
+5. Start your ORIGINAL start_windows.bat (not a file from the PATCH archive).
+6. Open http://localhost:3000; Ctrl+Shift+R; open OUTFIT STUDIO.
+   Status: VNE 23 / ORIGINAL.
+
+This patch does not contain a standalone server launcher and cannot run alone.
+If you prefer a clean installation, use VNE_RAMOK_23_FULL.zip.

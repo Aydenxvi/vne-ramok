@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.join(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+assert.match(read('.gitignore'),/\.env/);
+assert.match(read('render.yaml'),/PUBLIC_DEMO/);
+assert.match(read('storefront.js'),/readOnly=true/);
+assert.match(read('storefront.js'),/demo@example\.com/);
+assert.match(read('robots.txt'),/Disallow: \/api\//);
+console.log('  ok  publishing :: public fake checkout, ignored private files, Render demo mode');
