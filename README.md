@@ -1,6 +1,11 @@
-# VNE RAMOK 25 · Digital Fashion Studio
+# VNE RAMOK 26 · Digital Fashion Studio
 
 > **Portfolio demonstration • No real payments**
+
+**[Live demo](https://vne-ramok-portfolio.onrender.com/) · [GitHub repository](https://github.com/Aydenxvi/vne-ramok)**
+
+Public demo: explore the 3D studio, add products to the bag and print a fictional receipt. Registration/admin and real payments are disabled.
+
 
 An independent streetwear shopping experience with a fully interactive catalog, animated lookbook, original 3D outfit builder, demo checkout with a printed receipt, customer accounts, and a Node.js / SQLite administration system.
 
@@ -80,3 +85,11 @@ All 3D models in version 23 are original procedural geometry. Older third-party 
 ## Publish VNE RAMOK 25
 
 [**GitHub + Render step-by-step guide (Russian)**](docs/GITHUB_RENDER_25_RU.md). The public demo locks buyer fields to fictional contact information; no real personal information is required.
+
+## Version 26 — Portfolio polish
+
+- Public header links to the source repository instead of disabled account login; local login is unchanged.
+- Public checkout explicitly says “Оформить демо-заказ”, while local order creation keeps “Отправить заявку”.
+- Updated footer version, SVG favicon, Open Graph / X (Twitter) social preview.
+- The preview image is a crop of the included storefront screenshot, not a newly generated depiction.
+- Existing receipt animation, 3D Studio, API, and persistent local accounts are unchanged.

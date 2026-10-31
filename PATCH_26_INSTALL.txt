@@ -1,0 +1,25 @@
+VNE RAMOK 26 — FINAL PORTFOLIO POLISH (PATCH)
+
+1. Останови локальный сервер (Ctrl+C), если он открыт.
+2. Сохрани резервную копию папки vne-ramok.
+3. Распакуй VNE_RAMOK_26_FINAL_PATCH.zip.
+4. СКОПИРУЙ СОДЕРЖИМОЕ архива (index.html, storefront.js, server.js,
+   README.md, package.json, tests/ и assets/) в корень основного проекта
+   vne-ramok, где находятся index.html и server.js.
+   Подтверди замену файлов и объединение папок assets, tests.
+   Не создавай вложенную папку vne-ramok/vne-ramok.
+5. Проверь локально: start_windows.bat -> http://localhost:3000.
+   Для публичного режима в PowerShell: $env:PUBLIC_DEMO="1"; node server.js
+6. Для обновления GitHub выполни PowerShell в папке с .git:
+      git status
+      git add .
+      git commit -m "VNE RAMOK 26 - Final portfolio polish"
+      git push origin main
+7. В Render дождись автоматического повторного развёртывания
+   (или нажми Manual Deploy > Deploy latest commit).
+8. Открой https://vne-ramok-portfolio.onrender.com и проверь
+   кнопку GITHUB, демо-заказ и печать чека.
+
+Этот PATCH НЕ содержит локальную базу данных, .env или чужие GLB.
+В локальном режиме авторизация и сохранение заявок по-прежнему работают.
+В публичном режиме нет настоящих платежей и аккаунтов.

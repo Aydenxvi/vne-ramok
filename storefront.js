@@ -7,6 +7,15 @@
  const M=window.VRStore.money;
  const connected=window.VR_SERVER_MODE===true;
  const publicDemo=window.VR_PUBLIC_DEMO===true;
+ const githubUrl='https://github.com/Aydenxvi/vne-ramok';
+ // Public portfolio demo has no accounts: expose the source instead of a disabled login.
+ if(publicDemo){
+  const accountButton=$('account-open');
+  accountButton.innerHTML='GITHUB <span aria-hidden="true">↗</span>';
+  accountButton.setAttribute('aria-label','Исходный код VNE RAMOK на GitHub (новая вкладка)');
+  accountButton.title='Посмотреть исходный код проекта';
+ }
+ const orderActionLabel=publicDemo?'ОФОРМИТЬ ДЕМО-ЗАКАЗ ↗':'ОТПРАВИТЬ ЗАЯВКУ ↗';
  const CHECK_SVG='<svg class="order-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12.5L9.5 18L20 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  let me=null,loginTab='login',myOrders=[],myFavorites=[],orderState='idle';
  async function api(url,method='GET',body){
@@ -36,7 +45,7 @@
   orderState='idle';
   $('order-message').textContent='';$('order-submit').disabled=false;
   $('order-submit').classList.remove('processing','success');
-  $('order-submit').innerHTML='<span>ОТПРАВИТЬ ЗАЯВКУ ↗</span>';
+  $('order-submit').innerHTML='<span>'+orderActionLabel+'</span>';
   $('receipt-stage').hidden=true; $('receipt-stage').classList.remove('is-printing'); $('receipt-paper').innerHTML='';
   $('order-agree').checked=false;
   $('order-promo').value='';$('order-notes').value='';
@@ -93,7 +102,7 @@
     const response=await api('/api/orders','POST',d);
     orderState=VRPayment.nextState(orderState,'resolve-success');
     button.classList.remove('processing');button.classList.add('success');
-    button.innerHTML='<span>ЗАЯВКА ПРИНЯТА</span>'+CHECK_SVG;
+    button.innerHTML='<span>'+(publicDemo?'ДЕМО-ЗАКАЗ ГОТОВ':'ЗАЯВКА ПРИНЯТА')+'</span>'+CHECK_SVG;
     report(publicDemo?`Демо-заказ ${response.order.code} оформлен визуально — НЕ сохранён. Никакой оплаты и доставки нет.`:`Заявка ${response.order.code} сохранена! Сумма ${M(response.order.total)}. Оплата не произведена. Мы не отправляем автоматические письма и не оформляем доставку в этой демоверсии.`);
     printReceipt(receiptSummary,publicDemo?null:response.order);
     window.VRStore.clearCart();
@@ -139,7 +148,10 @@
   try{me=(await api('/api/me')).user;if(me){await Promise.all([refreshOrders(),refreshFavs()]);renderProfile()}else renderVisitor()}
   catch(err){status(err.message);me=null;renderVisitor()}
  }
- $('account-open').onclick=()=>{status('');(me?renderProfile():renderVisitor());$('account-dialog').showModal()};
+ $('account-open').onclick=()=>{
+  if(publicDemo){window.open(githubUrl,'_blank','noopener,noreferrer');return;}
+  status('');(me?renderProfile():renderVisitor());$('account-dialog').showModal();
+ };
  $('account-body').addEventListener('click',async e=>{
   const tab=e.target.closest('[data-tab]');if(tab){loginTab=tab.dataset.tab;renderVisitor();status('');return}
   if(e.target.closest('#logout')){

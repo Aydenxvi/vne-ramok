@@ -71,5 +71,5 @@ http.createServer((req, res) => {
     send(res, e.code || 500, { error: e instanceof HttpError ? e.message : 'Ошибка сервера. Попробуй ещё раз.' });
   });
 }).listen(PORT, HOST, () => {
-  console.log(`VNE RAMOK 23 / ${publicDemo?'PUBLIC PORTFOLIO DEMO':'LOCAL FULL BACKEND'}: http://${HOST}:${PORT}\nPayments: NOT CONNECTED. ${publicDemo?'No customer data/orders stored.':'Orders stored in local SQLite.'}`);
+  console.log(`VNE RAMOK 26 / ${publicDemo?'PUBLIC PORTFOLIO DEMO':'LOCAL FULL BACKEND'}: http://${HOST}:${PORT}\nPayments: NOT CONNECTED. ${publicDemo?'No customer data/orders stored.':'Orders stored in local SQLite.'}`);
 });

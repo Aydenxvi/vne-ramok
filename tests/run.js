@@ -4,7 +4,7 @@
 const assert = require('assert');
 const path = require('path');
 
-const files = ['cart.test.js', 'payment.test.js', 'checkout.test.js', 'wardrobe.test.js', 'outfit3d.test.js', 'shaders.test.js', 'glbassets.test.js', 'portfolio23.test.js', 'receipt.test.js'];
+const files = ['cart.test.js', 'payment.test.js', 'checkout.test.js', 'wardrobe.test.js', 'outfit3d.test.js', 'shaders.test.js', 'glbassets.test.js', 'portfolio23.test.js', 'receipt.test.js', 'polish26.test.js'];
 let pass = 0, fail = 0;
 
 for (const file of files) {
