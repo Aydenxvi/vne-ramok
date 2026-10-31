@@ -1,95 +1,99 @@
-# VNE RAMOK 26 · Digital Fashion Studio
+# VNE RAMOK — Digital Fashion Studio
 
-> **Portfolio demonstration • No real payments**
+**An interactive streetwear storefront built as a full-stack portfolio project.** Editorial motion design, a 3D outfit builder, and a complete fictional checkout experience.
 
-**[Live demo](https://vne-ramok-portfolio.onrender.com/) · [GitHub repository](https://github.com/Aydenxvi/vne-ramok)**
+**[Explore the live demo](https://vne-ramok-portfolio.onrender.com/)** · **[View the source](https://github.com/Aydenxvi/vne-ramok)** · **[Read the case study](docs/CASE_STUDY.md)**
 
-Public demo: explore the 3D studio, add products to the bag and print a fictional receipt. Registration/admin and real payments are disabled.
+> **Portfolio demo — not a real store.** Payments are never charged. In the hosted demo, customer contact details and orders are not persisted, and account/admin features are disabled.
 
+![VNE RAMOK — storefront](docs/screenshots/portfolio/01-home.webp)
 
-An independent streetwear shopping experience with a fully interactive catalog, animated lookbook, original 3D outfit builder, demo checkout with a printed receipt, customer accounts, and a Node.js / SQLite administration system.
+## The experience
 
-![VNE RAMOK storefront](docs/screenshots/01-hero.png)
+A streetwear concept built around expressive typography, a restrained lime-and-stone palette, and interactions that make choosing clothes feel like exploring a digital fashion editorial.
 
-## Highlights
+| Interactive LOOKBOOK | 3D OUTFIT STUDIO |
+| :--- | :--- |
+| ![Lookbook with clickable clothing hotspots](docs/screenshots/portfolio/03-lookbook.webp) | ![3D outfit builder](docs/screenshots/portfolio/04-outfit-studio.webp) |
+| Explore an editorial shoot and its product hotspots. | Rotate the model and combine tops, bottoms and accessories. |
 
-- **Original 3D Outfit Studio:** seven coordinated GLB assets (mannequin, T-shirt, hoodie, bomber, jeans, cargo and beanie), all made for one neutral pose and common coordinates. Mouse/touch orbit, zoom, color variants and outfit totals. GLB files are under 160 KB combined. Model source is in [`tools/build-studio-23.py`](tools/build-studio-23.py).
-- **Commerce UI:** responsive products, variants, size selection, lookbook hotspots, cart, promo codes and paper-receipt animation after demo checkout.
-- **Backend:** Node.js 22.13+, built-in SQLite, scrypt passwords, session cookies, server-side price/stock validation, stock-restocking on order cancellation, admin dashboard and photo upload.
-- **Portfolio public demo:** `PUBLIC_DEMO=1` allows catalog, Outfit Studio and fake checkout while disabling accounts/admin and **not storing contact details**. No card payments, no shipping integrations.
-- **Performance:** on-demand WebGL rendering, local image assets and reduced-motion support.
+| DROP PASS | Demo receipt |
+| :--- | :--- |
+| ![Interactive DROP PASS](docs/screenshots/portfolio/05-drop-pass.webp) | ![Fictional paper receipt after checkout](docs/screenshots/portfolio/09-receipt.webp) |
+| A tactile brand badge with motion effects. | A receipt-printer animation completes a fictional order. |
 
-## Local launch
+**[See all nine project screenshots](docs/SCREENSHOTS.md)**
 
-On Windows, double-click `start_windows.bat`.
+## Features
 
-Or use:
+- **Fashion storefront:** responsive navigation, product catalog, product pages, size/color options, and quick cart interactions.
+- **New Drop & Lookbook:** an animated stack of arrivals, editorial photos, clickable hotspots, and coordinated product recommendations.
+- **3D Outfit Studio:** original coordinated GLB models, 360° view, garment switching, color selections, and outfit pricing. Stylized visualization, not a physics-based virtual try-on.
+- **Demo checkout:** delivery options, totals, discount UI and an animated paper receipt. No card processing or actual purchases.
+- **Local full-stack mode:** account registration, session login, SQLite order storage, and an administrator interface for products and orders.
+- **Public portfolio mode:** catalog, outfit builder and fictional checkout remain usable; registration and admin access are disabled and customer/order details are not stored.
+- **Performance and access:** on-demand WebGL rendering, lazy-loaded media where applicable, responsive layouts and reduced-motion support.
+
+## Tech stack
+
+| Layer | Tools and approach |
+| --- | --- |
+| Frontend | HTML, CSS, vanilla JavaScript; no frontend framework or bundler |
+| 3D | WebGL and small original procedural `.glb` assets |
+| Backend | Node.js HTTP server and built-in `node:sqlite` |
+| Authentication | Scrypt password hashing, session cookies in local mode |
+| Testing | JavaScript unit checks and HTTP integration tests |
+| Deployment | Docker and Render Blueprint (`render.yaml`) |
+
+## Run locally
+
+Requires **Node.js 22.13+**. On Windows, run `start_windows.bat` in the project folder, or from a terminal:
 
 ```bash
 node server.js
 ```
 
-Visit **http://localhost:3000**. Requires Node.js **22.13+**. To create a local admin account:
+Open **http://localhost:3000**. To create an administrator for the local version, run:
 
 ```bash
 npm run admin:setup
 ```
 
-Admin interface: `http://localhost:3000/admin.html`. The local version saves accounts and **unpaid** order requests to `data/vneramok.sqlite`. No real payment is charged.
+Local data lives in `data/` and is intentionally excluded from Git. Do not upload database files, accounts or secrets to a public repository.
 
-## Public portfolio preview
-
-```bash
-# macOS/Linux
-PUBLIC_DEMO=1 node server.js
-```
-
-For Windows PowerShell:
+For a privacy-safe public demonstration:
 
 ```powershell
+# Windows PowerShell
 $env:PUBLIC_DEMO="1"
 node server.js
 ```
 
-Demo checkout uses fictional details and returns a visual receipt without saving customer data or changing stock. Registration/admin APIs are blocked. For safe deployment, see [**GITHUB_RENDER_25_RU.md**](docs/GITHUB_RENDER_25_RU.md) and the supplied `Dockerfile` + `render.yaml`.
+```bash
+# macOS / Linux
+PUBLIC_DEMO=1 node server.js
+```
 
-**Hosting not included:** this archive does not publish your code or create a live URL. You must connect your own GitHub repository and hosting account.
-
-## Tech stack
-
-| Layer | Technology |
-| --- | --- |
-| UI | Vanilla JavaScript, semantic HTML, modular CSS |
-| 3D | Original procedural GLB assets, lightweight WebGL viewer; no animation loop while idle |
-| Backend | Node.js HTTP and `node:sqlite`, zero runtime npm packages |
-| Auth | Scrypt-hashed passwords, random hashed session tokens, HttpOnly same-site cookies |
-| QA | In-process unit checks, server integration tests, public-demo privacy checks |
-| Delivery | Docker, Render Blueprint, local Windows launcher |
-
-## Tests
+## Quality and architecture
 
 ```bash
 npm test
 ```
 
-Runs 54 in-process checks, 9 local HTTP integration checks, and a public-demo integration smoke check. The WebGL image is not validated on all graphics drivers: test it on your own machine before making the demo public.
+Includes tests for catalog/cart behavior, wardrobe selections, demo receipt, backend logic, and public-demo protections. Browser rendering of 3D may vary by GPU; source tests alone do not guarantee visual fidelity on every device.
 
-## Source organization
+- `wardrobe.js` handles outfit selection and price display.
+- `outfit-glb.js` renders selected GLB assets.
+- `server/routes/` holds catalog, account, order, and admin endpoints.
+- `server/public-demo.js` safeguards the hosted presentation mode.
+- `assets/studio-23/` contains lightweight custom 3D assets.
 
-`wardrobe.js` handles interactive selections; `outfit-glb.js` streams only selected garments; `assets/studio-23/` has original aligned models. `server/routes/` contains catalog, account, order and admin APIs; `server/public-demo.js` is the privacy guard for hosted demos. `docs/CASE_STUDY.md` describes the architecture and earlier stages.
+## Deployment
 
-All 3D models in version 23 are original procedural geometry. Older third-party models and their large binary files are not bundled. Portfolio photographs and branding remain demonstration assets.
+The live portfolio is hosted on Render using `Dockerfile` and `render.yaml`. A free instance may need time to wake after inactivity. More deployment detail: [GitHub & Render instructions](docs/GITHUB_RENDER_25_RU.md).
 
-**Limitations:** stylized 3D is not a photoreal fitting room or fabric simulation; public mode intentionally disables login, admin operations and real order persistence. Neither mode accepts real payment. Do not use this project as a production commerce store without a comprehensive security/privacy review.
+## Scope and acknowledgements
 
-## Publish VNE RAMOK 25
+This is a **portfolio demonstration**, not a production-ready commerce platform. It intentionally does not support real payments, carrier integration, verified inventory or transactional email. The visual editorial content is demonstration material. The 3D mannequin and clothing set are stylized original procedural geometry; they do not claim physically accurate fitting.
 
-[**GitHub + Render step-by-step guide (Russian)**](docs/GITHUB_RENDER_25_RU.md). The public demo locks buyer fields to fictional contact information; no real personal information is required.
-
-## Version 26 — Portfolio polish
-
-- Public header links to the source repository instead of disabled account login; local login is unchanged.
-- Public checkout explicitly says “Оформить демо-заказ”, while local order creation keeps “Отправить заявку”.
-- Updated footer version, SVG favicon, Open Graph / X (Twitter) social preview.
-- The preview image is a crop of the included storefront screenshot, not a newly generated depiction.
-- Existing receipt animation, 3D Studio, API, and persistent local accounts are unchanged.
+**[Live demo](https://vne-ramok-portfolio.onrender.com/) · [Case study](docs/CASE_STUDY.md) · [Screenshot gallery](docs/SCREENSHOTS.md)**
